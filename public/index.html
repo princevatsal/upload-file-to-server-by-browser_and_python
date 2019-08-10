@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<body>
+   
+ 
+ <!--  SINGLE FILE -->
+<form style="background: #999;padding:20px;margin-bottom: 20px;"  enctype="multipart/form-data" >
+	<label style="color: white;margin-right: 10px;">Upload a file</label> 
+   <input type="file" name="myFile" />
+   <input type="submit" value="Upload a file"/>
+   <progress value="0" max="100" style="width: 300px;" class="progress"></progress>
+</form>
+ 
+ <h1>0%</h1>
+ 
+<!-- MULTIPLE FILES -->
+<!--  
+<form action="/uploadmultiple" style="background: #999;padding:20px;margin-bottom: 20px;" enctype="multipart/form-data" method="POST">
+	<label style="color: white;margin-right: 10px;">Upload Multiple FIles</label> <input type="file" name="myFiles" multiple>
+  <input type="submit" value="Upload your files"/>
+</form>
+ 
+<form style="background: #999;padding:20px;margin-bottom: 20px;" action="/upload/photo" enctype="multipart/form-data" method="POST"> 
+	<label style="color: white;margin-right: 10px;">Upload Photo</label>
+  <input type="file" name="myImage" accept="image/*" />
+  <input type="submit" value="Upload Photo"/>
+</form>
+  -->
+ 
+ <script type="text/javascript">
+   const form=document.querySelector('form')
+   const progress=document.querySelector('.progress')
+   const h1=document.querySelector('h1')
+   form.addEventListener('submit',e=>{
+    e.preventDefault()
+    console.log('submitting',form)
+    const xhr=new XMLHttpRequest()
+    xhr.open('POST','http://localhost:3000/uploadfile',true)
+    xhr.onload=function(){
+      console.log('file uploaded sucessfully')
+    }
+    xhr.upload.onprogress=function(e){
+      var percent=Math.ceil((e.loaded/e.total)*100)
+      h1.innerHTML=percent+'%'
+      progress.value=percent
+    }
+    var formData=new FormData()
+    formData.append('myFile',form[0].files[0])
+    xhr.send(formData)
+   })
+ </script>
+</body>
+</html>
