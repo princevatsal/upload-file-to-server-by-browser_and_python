@@ -39,7 +39,7 @@
     e.preventDefault()
     console.log('submitting',form)
     const xhr=new XMLHttpRequest()
-    xhr.open('POST','pythonuploadserver.herokuapp.com/uploadfile',true)
+    xhr.open('POST','/uploadfile',true)
     xhr.onload=function(){
       console.log('file uploaded sucessfully')
     }
