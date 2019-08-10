@@ -21,7 +21,7 @@ app.post('/uploadfile',(req,res)=>{
 		console.log('Upload of '+filename+' started')
 		//creating write stream
 		console.log(file)
-		const fstream=fs.createWriteStream(path.join('uploads/',filename))
+		const fstream=fs.createWriteStream(path.join('public/upload/',filename))
 
 		//pipe it through
 		file.pipe(fstream)
